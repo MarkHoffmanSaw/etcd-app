@@ -1,0 +1,23 @@
+* {
+  margin: 0 5px;
+}
+
+.inline {
+  display: flex;
+}
+
+.cell {
+  width: 150px;
+  max-width: 150px;
+  font-size: 70%;
+}
+
+.cell:hover {
+  background-color: rgb(255, 251, 5);
+}
+
+.component {
+  width: 300px;
+  max-width: 300px;
+  text-align: right;
+}

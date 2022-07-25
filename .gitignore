@@ -1,0 +1,6 @@
+# Client's folder:
+client/node_modules
+client/dist
+
+# Server's folder:
+server/node_modules
