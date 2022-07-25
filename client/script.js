@@ -9,10 +9,6 @@ async function fetchDataAndRenderDoc() {
 
   const result = await data.json();
 
-  // const parsed = JSON.parse(result["data"]["environments.echo.cadvisor.image"]);
-
-  // console.log(parsed.tag);
-
   // Render table
   for (let i = 0; i < components.length + 1; i++) {
     // Create inline parent div
@@ -37,21 +33,12 @@ async function fetchDataAndRenderDoc() {
       const cellDiv = document.createElement("div");
       cellDiv.setAttribute("class", "cell");
 
-      let keyName;
-      let value;
-
       console.log(`environments.${stands[j]}.${components[i]}.image`);
-      keyName = `environments.${stands[j]}.${components[i]}.image`;
-      const valueToParse = await result.data[keyName];
-      // console.log(valueToParse);
-      console.log(valueToParse && JSON.parse(valueToParse).tag);
 
-      // console.log(
-      //   "value.tag: ",
-      //   value ? JSON.stringify(value.tag) : null,
-      //   stands[j],
-      //   components[i + 1]
-      // );
+      const keyName = `environments.${stands[j]}.${components[i]}.image`;
+      const valueToParse = await result.data[keyName];
+
+      console.log(valueToParse && JSON.parse(valueToParse).tag);
 
       if (i === 0) {
         const text = document.createTextNode(stands[j]);
@@ -60,6 +47,7 @@ async function fetchDataAndRenderDoc() {
         componentsDiv.append(cellDiv);
       } else {
         const text = document.createTextNode(
+          // Pass into cell here whether 'valueToParse' exists!
           valueToParse && JSON.parse(valueToParse).tag
         );
         cellDiv.appendChild(text);
