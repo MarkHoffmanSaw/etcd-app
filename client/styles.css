@@ -1,5 +1,11 @@
 * {
-  margin: 0 5px;
+  margin: 0;
+}
+
+#stands {
+  position: sticky;
+  top: 0;
+  background-color: rgb(187, 187, 187);
 }
 
 .inline {
@@ -8,16 +14,35 @@
 
 .cell {
   width: 150px;
-  max-width: 150px;
+  max-width: 300px;
   font-size: 70%;
+  overflow: hidden;
+  max-width: 30ch;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.stands {
+  font-size: 100%;
 }
 
 .cell:hover {
-  background-color: rgb(255, 251, 5);
+  background-color: rgb(54, 142, 193);
+  border-radius: 5%;
 }
 
 .component {
+  padding: 10px;
   width: 300px;
   max-width: 300px;
   text-align: right;
+  color: white;
+  background-color: rgb(16, 16, 16);
+}
+
+.crosshair {
+  background-color: rgb(54, 142, 193);
+  border-radius: 5%;
 }

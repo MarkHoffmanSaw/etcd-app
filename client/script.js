@@ -10,7 +10,7 @@ async function fetchDataAndRenderDoc() {
   const result = await data.json();
 
   // Render table
-  for (let i = 0; i < components.length + 1; i++) {
+  for (let i = 0; i < components.length; i++) {
     // Create inline parent div
     const componentsDiv = document.createElement("div");
     if (i === 0) {
@@ -23,6 +23,7 @@ async function fetchDataAndRenderDoc() {
     // Populate inline parent div
     const oneCompDiv = document.createElement("div");
     const textComponent = document.createTextNode(components[i]);
+    oneCompDiv.setAttribute("id", `${components[i]}-title`);
     oneCompDiv.appendChild(textComponent);
     oneCompDiv.setAttribute("class", "component");
 
@@ -31,19 +32,17 @@ async function fetchDataAndRenderDoc() {
     // Populate columns div
     for (let j = 0; j < stands.length; j++) {
       const cellDiv = document.createElement("div");
-      cellDiv.setAttribute("class", "cell");
 
-      console.log(`environments.${stands[j]}.${components[i]}.image`);
+      cellDiv.setAttribute("class", "cell");
 
       const keyName = `environments.${stands[j]}.${components[i]}.image`;
       const valueToParse = await result.data[keyName];
-
-      console.log(valueToParse && JSON.parse(valueToParse).tag);
 
       if (i === 0) {
         const text = document.createTextNode(stands[j]);
         cellDiv.appendChild(text);
         cellDiv.setAttribute("id", stands[j]);
+        cellDiv.classList.add("stands");
         componentsDiv.append(cellDiv);
       } else {
         const text = document.createTextNode(
@@ -61,3 +60,32 @@ async function fetchDataAndRenderDoc() {
 }
 
 fetchDataAndRenderDoc();
+
+// Color the current element
+async function colorElements() {
+  const mainDiv = document.querySelector("#main_div");
+
+  const factoryListener = (event) => {
+    // Get cell coords by event listener
+    if (event.target.dataset.coords) {
+      const compId = event.target.dataset.coords.split("-")[0];
+      const standId = event.target.dataset.coords.split("-")[1];
+
+      const component = document.getElementById(`${compId}-title`);
+      const stand = document.getElementById(standId);
+
+      component.classList.toggle("crosshair");
+      stand.classList.toggle("crosshair");
+    }
+  };
+
+  mainDiv.addEventListener("mouseover", (event) => {
+    factoryListener(event);
+  });
+
+  mainDiv.addEventListener("mouseout", (event) => {
+    factoryListener(event);
+  });
+}
+
+colorElements();

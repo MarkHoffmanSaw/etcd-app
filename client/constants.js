@@ -11,7 +11,7 @@ export const stands = [
 ];
 
 export const components = [
-  "name",
+  "*",
   "cadvisor",
   "chatpal",
   "cu",
